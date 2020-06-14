@@ -1,0 +1,22 @@
+﻿{extend name="base" /}
+{block name="body"}
+<section class="container">
+  <div class="page_left">
+  <ul>
+    <li><a href="{:url('index/PersonalData/index')}">关于博主</a></li>
+    <li><a href="{:url('index/Link/index')}">友链申请</a></li> 
+    <li><a href="{:url('index/DaySentence/index')}">精句提交</a></li> 
+  </ul>
+  </div>
+  <div class="page_right" style="height: 623px;">
+      <h1 class="page_title"><a href="{:url('index/Index/index')}">主页</a> > <a href='#'>关于</a> > </h1>   
+      <div class="page_content">
+         <p><img style="float:left; margin-right:20px; width:256px; height:340px;" alt="cc" src="{$res.image}"></p>
+         <p><strong>姓    名:</strong> {$res.name} </p> 
+         <p><strong>性    别:</strong> {if condition="$res.sex"}男{else}女{/if}  </p>
+         <p><strong>年    龄:</strong> {$res.age}  </p>
+         <p><strong>个人说明:</strong> {$res.descript}</p>
+      </div>
+  </div>
+</section>
+{/block}

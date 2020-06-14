@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>后台管理系统</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="__VENDORS__/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="__VENDORS__/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="__CSS__/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="__CSS__/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="__CSS__/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="__IMGS__/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="page">
+    	<!--头部-->
+      <header class="header">
+        <nav class="navbar">
+          <!-- Search Box-->
+          <div class="search-box">
+            <button class="dismiss"><i class="icon-close"></i></button>
+            <form id="searchForm" action="#" role="search">
+              <input type="search" placeholder="What are you looking for..." class="form-control">
+            </form>
+          </div>
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <!-- Navbar Header-->
+              <div class="navbar-header">
+                <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                  <div class="brand-text d-none d-lg-inline-block"><span>个人博客 </span><strong>管理系统</strong></div>
+                  <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
+                <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+              </div>
+              <!-- Navbar Menu -->
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <!-- Search-->
+<!--                <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>-->
+                <!-- 铃铛消息 -->
+<!--                <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">12</span></a>-->
+<!--                  <ul aria-labelledby="notifications" class="dropdown-menu">-->
+<!--                    <li><a rel="nofollow" href="#" class="dropdown-item"> -->
+<!--                        <div class="notification">-->
+<!--                          <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>-->
+<!--                          <div class="notification-time"><small>4 minutes ago</small></div>-->
+<!--                        </div></a></li>-->
+<!--                    <li><a rel="nofollow" href="#" class="dropdown-item"> -->
+<!--                        <div class="notification">-->
+<!--                          <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>-->
+<!--                          <div class="notification-time"><small>4 minutes ago</small></div>-->
+<!--                        </div></a></li>-->
+<!--                    <li><a rel="nofollow" href="#" class="dropdown-item"> -->
+<!--                        <div class="notification">-->
+<!--                          <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>-->
+<!--                          <div class="notification-time"><small>4 minutes ago</small></div>-->
+<!--                        </div></a></li>-->
+<!--                    <li><a rel="nofollow" href="#" class="dropdown-item"> -->
+<!--                        <div class="notification">-->
+<!--                          <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>-->
+<!--                          <div class="notification-time"><small>10 minutes ago</small></div>-->
+<!--                        </div></a></li>-->
+<!--                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>-->
+<!--                  </ul>-->
+<!--                </li>-->
+                <!-- 退出    -->
+                <li class="nav-item"><a href="{:url('admin/Login/loginout')}" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="page-content d-flex align-items-stretch"> 
+      	<!--侧边栏-->
+        <nav class="side-navbar">
+          <!-- Sidebar Header-->
+          <div class="sidebar-header d-flex align-items-center">
+            <div class="avatar"><img src="__IMGS__/cc.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="title">
+              <h1 class="h4">{$adminInfo['username']}</h1>
+              <p>{$adminInfo['group_name']}</p>
+            </div>
+          </div>
+          <!-- Sidebar Navidation Menus--><span class="heading">菜单</span>
+          <ul class="list-unstyled">
+            <!-- class="active" 选中 -->
+            <li><a href="{:url('admin/Index/index')}"> <i class="icon-home"></i>首页 </a></li>
+
+            <li><a href="{:url('admin/Setting/index')}"> <i class="icon-home"></i>系统设置 </a></li>
+
+            <li><a href="#menu1" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>权限管理 </a>
+              <ul id="menu1" class="collapse list-unstyled ">
+                <li><a href="{:url('admin/Authority/authGroup')}">权限组管理</a></li>
+                <li><a href="{:url('admin/Authority/userList')}">系统用户管理</a></li>
+                <li><a href="{:url('admin/Authority/userLog')}">系统用户日志</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#menu2" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>文章管理 </a>
+              <ul id="menu2" class="collapse list-unstyled ">
+                <li><a href="{:url('admin/ArticleType/index')}">文章类型</a></li>
+                <li><a href="{:url('admin/Article/index')}">文章列表</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{:url('admin/Carousel/index')}"> <i class="icon-home"></i>轮播图管理 </a></li>
+
+            <li><a href="{:url('admin/Link/index')}"> <i class="icon-home"></i>友情链接管理 </a></li>
+
+            <li><a href="{:url('admin/Message/index')}"> <i class="icon-home"></i>留言板管理 </a></li>
+
+            <li><a href="{:url('admin/DaySentence/index')}"> <i class="icon-home"></i>每日一句管理 </a></li>
+
+            <li><a href="{:url('admin/CurrentAccount/index')}"> <i class="icon-home"></i>流水账管理 </a></li>
+
+            <li><a href="{:url('admin/PersonalData/index')}"> <i class="icon-home"></i>博主资料 </a></li>
+
+            <li><a href="{:url('admin/Tool/index')}"> <i class="icon-home"></i>工具库管理 </a></li>
+
+          </ul>
+          </ul><span class="heading">其他示例</span>
+          <ul class="list-unstyled">
+            <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
+            <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
+            <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
+            <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+          </ul>
+        </nav>
+
+        <!--主体-->
+    	{block name="body"}{/block}
+
+        <!--底部-->
+          <footer class="main-footer">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-6">
+                  <p>灿豪爸爸</p>
+                </div>
+                <div class="col-sm-6 text-right">
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="__VENDORS__/jquery/jquery.min.js"></script>
+    <script src="__VENDORS__/popper.js/umd/popper.min.js"> </script>
+    <script src="__VENDORS__/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__VENDORS__/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="__VENDORS__/chart.js/Chart.min.js"></script>
+    <script src="__VENDORS__/jquery-validation/jquery.validate.min.js"></script>
+    <script src="__JS__/charts-home.js"></script>
+    <!-- Main File-->
+    <script src="__JS__/front.js"></script>
+    <!-- 编辑器配置文件 -->
+    <script type="text/javascript" src="__UEDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" src="__UEDITOR__/ueditor.all.js"></script>
+    <script type="text/javascript" src="__UEDITOR__/lang/zh-cn/zh-cn.js"></script>
+    <!-- 时间文件 -->
+    <script type="text/javascript" charset="utf-8" src="__STATIC__/laydate/laydate.js"></script>
+
+    <script type="text/javascript">
+      var ue = UE.getEditor('contents',{
+        // initialFrameWidth: 900,    //初始化宽度
+        initialFrameHeight: 200,   //初始化高度
+        maximumWords:1000,         //最大长度限制
+        autoHeightEnabled: true,  //禁止自动长高
+        autoFloatEnabled:false,    //禁止工具条漂浮
+        zIndex:"0"
+      });
+        var ue = UE.getEditor('content',{
+          // initialFrameWidth: 900,    //初始化宽度
+          initialFrameHeight: 150,   //初始化高度
+          maximumWords:1000,         //最大长度限制
+          autoHeightEnabled: false,  //禁止自动长高
+          autoFloatEnabled:false,    //禁止工具条漂浮
+          zIndex:"0"
+        });
+        var ue = UE.getEditor('content_en',{
+          // initialFrameWidth: 900,    //初始化宽度
+          initialFrameHeight: 150,   //初始化高度
+          maximumWords:1000,         //最大长度限制
+          autoHeightEnabled: false,  //禁止自动长高
+          autoFloatEnabled:false,    //禁止工具条漂浮
+          zIndex:"0"
+        });
+
+        $(function () {
+            laydate.render({
+                elem: '#time', //指定元素
+                type: 'date'
+            });
+        })
+      $(function () {
+        laydate.render({
+          elem: '#star_time', //指定元素
+          type: 'date'
+        });
+      })
+      $(function () {
+        laydate.render({
+          elem: '#end_time', //指定元素
+          type: 'date'
+        });
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner" style="padding-bottom: 59px;">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">添加文章</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">文章列表</a></li>
+              <li class="breadcrumb-item active">添加文章</li>
+            </ul>
+          </div>
+          <!-- Forms Section-->
+          <section class="forms"> 
+            <div class="container-fluid">
+              <div class="row">
+                <!-- Form Elements -->
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <form class="form-horizontal" method="post" action="save.html" enctype="multipart/form-data">
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">创建者：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="uid" value="{$adminInfo['username']}" disabled>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">名称：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="title" name="title" value="" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">文章类型：</label>
+                          <div class="col-sm-9">
+                           <select class="form-control input-lg m-bot15" name="pid">
+                              {volist name="articleType" id="vo"}
+                              <option value="{$vo.id}">{$vo.name}</option>
+                              {/volist}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">标签：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="label" name="label" value="" placeholder="每个标签用英文逗号隔开">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">图片：</label>
+                          <div class="col-sm-9">
+                            <input type="file" name="images[]" multiple='multiple'>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">描述：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="describe" name="describe" value="" placeholder="请输入50字以内" maxlength="50">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">内容：</label>
+                          <div class="col-sm-9">
+                            <textarea id="contents" name="content" rows="10"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">是否显示：</label>
+                          <div class="col-sm-9">
+                            <input type="radio" name="status" value="1" checked><span style="margin-right: 3%;">是</span>
+                            <input type="radio" name="status" value="0"><span style="margin-right: 3%;">否</span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">是否推荐：</label>
+                          <div class="col-sm-9">
+                            <input type="radio" name="recommend" value="1"><span style="margin-right: 3%;">是</span>
+                            <input type="radio" name="recommend" value="0" checked><span style="margin-right: 3%;">否</span>
+                          </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <input class="btn btn-primary" value="确认" type="submit">
+                          <button class="btn btn-default " type="button" onclick="history.go(-1)">退出</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+{/block}

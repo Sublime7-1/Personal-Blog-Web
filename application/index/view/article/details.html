@@ -1,0 +1,56 @@
+﻿{extend name="base" /}
+{block name="body"}
+<section class="container"> 
+   <div class="content-wrap"> 
+    <div class="content"> 
+     <header class="article-header"> 
+      <h1 class="article-title"></h1>
+      <h1>{$res.title}</h1> 
+      <div class="meta">
+       <p style="float:right; display:none; margin:0px; "><a href="{:url('index/Index/index')}">主页</a> &gt; <a href="#">学习</a> &gt; <a href="{:url('index/Index/index')}">php</a> &gt; </p> 
+       <time class="muted"> <i class="ico icon-time icon12"></i>&nbsp;创建时间：{$res.create_time|date="Y-m-d",###} </time> 
+       <span class="muted"> <i class="ico icon-eye-open icon12"></i>&nbsp;浏览次数：{$res.browse_num}</span>  
+      </div> 
+     </header> 
+     <article class="article-content"> 
+      <blockquote> 
+       <p> <strong>摘要：</strong>{$res.describe}</p> 
+      </blockquote> 
+      <p></p>
+          {$res.content}
+      <div>
+        &nbsp;
+      </div>
+     </article> 
+     <nav class="article-nav">
+      {if condition="!empty($prev_article)"}
+      <span class="article-nav-prev">上一篇：<a href="{:url('index/Article/details',['id'=>$prev_article.id])}">{$prev_article['title']}</a></span> 
+      {else}
+      <span class="article-nav-prev">没有上一篇了</span> 
+      {/if}
+      {if condition="!empty($next_article)"}
+      <span class="article-nav-next">下一篇：<a href="{:url('index/Article/details',['id'=>$next_article.id])}">{$next_article['title']}</a> </span>
+      {else}
+      <span class="article-nav-next">没有下一篇了</span> 
+      {/if} 
+     </nav> 
+     <!-- 评论 --> 
+     <div id="commend" style="width: 600px;height: 200px">评论区</div> 
+     <!-- 评论 --> 
+    </div> 
+   </div> 
+   <!-- <aside class="sidebar"> 
+    <div class="widget d_postlist"> 
+     <h3 class="widget_tit">推荐文章</h3> 
+     <ul> 
+      <li><a href="/xx/php/307.html"> <span class="thumbnail"> <img src="static/picture/1-1609241a543r4.jpg" alt="&lt;strong&gt;PHP面向对象.__set()，__get&lt;/strong&gt;" title="&lt;strong&gt;PHP面向对象.__set()，__get&lt;/strong&gt;" /></span> <span class="text"><strong>PHP面向对象.__set()，__get</strong></span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">500次浏览</span> </span> </a></li> 
+      <li><a href="/xx/php/306.html"> <span class="thumbnail"> <img src="static/picture/1-1609241a543r4.jpg" alt="&lt;strong&gt;PHP面向对象之const常量修饰&lt;/strong&gt;" title="&lt;strong&gt;PHP面向对象之const常量修饰&lt;/strong&gt;" /></span> <span class="text"><strong>PHP面向对象之const常量修饰</strong></span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">183次浏览</span> </span> </a></li> 
+      <li><a href="/xx/php/305.html"> <span class="thumbnail"> <img src="static/picture/1-1609241a543r4.jpg" alt="&lt;strong&gt;php面向对象之子类中重载&lt;/strong&gt;" title="&lt;strong&gt;php面向对象之子类中重载&lt;/strong&gt;" /></span> <span class="text"><strong>php面向对象之子类中重载</strong></span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">138次浏览</span> </span> </a></li> 
+      <li><a href="/xx/php/304.html"> <span class="thumbnail"> <img src="static/picture/1-1609241a543r4.jpg" alt="&lt;strong&gt;php面向对象编程之构造方&lt;/strong&gt;" title="&lt;strong&gt;php面向对象编程之构造方&lt;/strong&gt;" /></span> <span class="text"><strong>php面向对象编程之构造方</strong></span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">106次浏览</span> </span> </a></li> 
+      <li><a href="/xx/php/317.html"> <span class="thumbnail"> <img src="static/picture/1-1609241a543r4.jpg" alt="smarty3从入门到精通详解" title="smarty3从入门到精通详解" /></span> <span class="text">smarty3从入门到精通详解</span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">93次浏览</span> </span> </a></li> 
+      <li><a href="/xx/php/318.html"> <span class="thumbnail"> <img src="static/picture/1-1609261454461z.jpg" alt="php中echo()和print()、requir" title="php中echo()和print()、requir" /></span> <span class="text">php中echo()和print()、requir</span> <span class="muted">2019-09-26</span> <span class="muted"> <span class="ds-thread-count" data-replace="1">115次浏览</span> </span> </a></li> 
+     </ul> 
+    </div> 
+   </aside> --> 
+  </section> 
+{/block}

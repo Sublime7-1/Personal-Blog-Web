@@ -1,0 +1,69 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">评论列表</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">文章管理</a></li>
+              <li class="breadcrumb-item active">评论列表</li>
+            </ul>
+          </div>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <!-- <div class="card-close">
+                      <form class="form-inline" method="get">
+                        <div class="form-group">
+                          <input id="inlineFormInput" name="keyword" type="text" placeholder="文章名称/创建者" class="mr-3 form-control" value="{$Think.get.keyword}">
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary">搜索</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-header d-flex align-items-center">
+                    </div> -->
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>评论人</th>
+                              <th>评论内容</th>
+                              <th>评论时间</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {foreach name="res" item="vo"}
+                            <tr>
+                              <th scope="row">{$vo.id}</th>
+                              <td>{$vo.name}</td>
+                              <td>{$vo.content}</td>
+                              <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+                              <td>
+
+                              </td>
+                            </tr>
+                            {/foreach}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </section>
+          <script>
+
+          </script>
+{/block}

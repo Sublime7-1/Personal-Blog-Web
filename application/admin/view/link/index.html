@@ -1,0 +1,81 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">友情链接管理</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">友情链接管理</a></li>
+              <li class="breadcrumb-item active">友情链接列表</li>
+            </ul>
+          </div>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-close">
+                      <form class="form-inline" method="get">
+                        <div class="form-group">
+                          <input id="inlineFormInput" name="keyword" type="text" placeholder="友情链接名称" class="mr-3 form-control" value="{$Think.get.keyword}">
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary">搜索</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-header d-flex align-items-center">
+                      <p>&nbsp;</p>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名称</th>
+                                <th>链接</th>
+                                <th>展示图</th>
+                                <th>申请时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach name="res" item="vo"}
+                            <tr>
+                                <td scope="row">{$vo.id}</td>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.url}</td>
+                                <td>{$vo.image}</td>
+                                <td>{$vo.apply_time|date="Y-m-d H:i:s",###}</td>
+                                <td>{if condition="$vo['status'] == 0"}待审核{elseif condition="$vo['status'] == 1"}审核通过{elseif condition="$vo['status'] == 2"}审核不通过{elseif condition="$vo['status'] == 3"}失效{else}{/if}</td>
+                                <td>
+                                  <a href="showLink.html?id={$vo.id}"><i class="fa fa-edit text-success text-active padding10"></i>查看详情</a>
+                                  {if condition="$vo['status'] == 0"}
+                                  <a href="check.html?id={$vo.id}&status=1" onclick="if(confirm('确认通过？')==false)return false;"><i class="fa fa-edit text-success text-active padding10"></i>通过</a>
+                                  <a href="check.html?id={$vo.id}&status=2" onclick="if(confirm('确认不通过？')==false)return false;"><i class="fa fa-edit text-success text-active padding10"></i>不通过</a>
+                                  {elseif condition="$vo['status'] == 1"}
+                                  <a href="check.html?id={$vo.id}&status=3" onclick="if(confirm('确认使其失效？')==false)return false;"><i class="fa fa-edit text-success text-active padding10"></i>失效</a>
+                                  {else}{/if}
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                          {$res->render()}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </section>
+          <script>
+
+          </script>
+{/block}

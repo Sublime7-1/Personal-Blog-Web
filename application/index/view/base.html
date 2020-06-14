@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="UTF-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8,ie=7" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+  <title>个人博客</title>
+  <meta name="keywords" content="" /> 
+  <meta name="description" content="" /> 
+  <link rel="stylesheet" id="open_social_css-css" href="__STATIC__/index/css/os_2.css" type="text/css" media="all" /> 
+  <link rel="stylesheet" href="__STATIC__/index/css/style_2.css" media="all" /> 
+  <link rel="stylesheet" href="__STATIC__/index/css/swiper.min_2.css" media="all" /> 
+  <link href="__STATIC__/index/css/font-awesome.min_2.css" rel="stylesheet" media="screen" />
+  <script type="text/javascript" src="__STATIC__/index/js/base.loading_2.js"></script>
+ </head> 
+ <body class="home blog"> 
+  <div class="placeholder"></div> 
+  <!--[if lt IE 9]>
+  <script src="__STATIC__/index/js/html5_2.js"></script>
+<![endif]--> 
+  <script src="__STATIC__/index/js/jquery_2.js"></script>
+  <script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+  <script>window._deel = {
+  maillist: '',
+  maillistCode: '',
+  commenton: 0,
+  roll: [0, 0]
+  }</script> 
+  <script type="text/javascript">$(function() {
+  $(window).scroll(function() {
+    $offset = $('.placeholder').offset(); //不能用自身的div，不然滚动起来会很卡
+    if ($(window).scrollTop() > $offset.top) {
+    $('.header').css({
+      'position': 'fixed',
+      'top': '0px',
+      'left': $offset.left + 'px',
+      'z-index': '999'
+    });
+    $(".container").css({
+      "margin-top": "93px"
+    });
+    } else {
+    $('.header').removeAttr('style');
+    $('.container').removeAttr('style');
+    }
+  });
+  })
+</script> 
+  <!--头部开始--> 
+  <header class="header" style="height: 52px;"> 
+   <div class="navbar"> 
+    <p class="logo">
+      <a href="/" title="个人博客" alt="个人博客"><img style="display: block;height: 100%;width: 100%" alt="个人博客" src="__IMGS__/logo.png" /></a>
+    </p> 
+    <ul class="nav"> 
+      <li class="menu-item menu-item-type-custom menu-item-object-custom  menu-item-home">
+        <a href="/">首页</a>
+      </li> 
+      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+        <a href="">关于</a> 
+        <ul class="sub-menu"> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="{:url('index/PersonalData/index')}">关于博主</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="{:url('index/Link/index')}">友链申请</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="{:url('index/DaySentence/index')}">精句提交</a></li> 
+        </ul>
+      </li> 
+      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+        <a href="#">学习</a> 
+        <ul class="sub-menu"> 
+          {foreach $articleTypeHeader as $vo}
+          <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="{:url('index/Article/index',['pid'=>$vo.id])}">{$vo.name}</a></li> 
+          {/foreach}
+        </ul>
+      </li> 　　 　　　　
+      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+        <a href="{:url('index/MessageBoard/index')}">留言</a>
+      </li> 
+    </ul> 
+    <div class="pull-right" style="width: 240px;margin-top: 10px;"> 
+     <form name="formsearch" action="{:url('index/search/index')}" method="get">
+      <input class="search-input" name="keyword" type="text" id="search-keyword" value="{$Think.get.keyword}" required="required" placeholder="输入你要找的内容" />
+      <button type="submit" class="searchbtn search-submit" title="搜一下"> <i class="fa"></i> </button>
+     </form> 
+    </div>
+       <div class="login-reg">
+           <input type="button" value="登录">
+       </div>
+   </div>
+      <style>
+          .login-reg {
+              width: 200px;
+              height: 52px;
+              position: absolute;
+              right: 0px;
+              text-align: center;
+              line-height: 52px;
+              display: none;
+          }
+      </style>
+  </header>
+  <!--头部结束-->
+
+
+
+      <!--主体-->
+    	{block name="body"}{/block}
+
+
+
+  <!--底部-->
+  <link rel="stylesheet" type="text/css" href="__STATIC__/chatBox/font_Icon/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="__STATIC__/chatBox/css/chat.css">
+  <footer class="footer"> 
+      <div class="footer-inner">
+    <div style="padding:0 20px;overflow:hidden;"> 
+     <div class="copyright pull-left"> 
+      <a href="{:url('index/PersonalData/index')}">关于</a> | 
+      <a href="#">学习</a> | 
+      <a>Copyright &copy; 2016, ccc All Rights Reserved. </a>|
+      <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow">苏ICP备16050559号</a>
+     </div>
+     <div class="trackcode pull-right" id="census"></div>
+    </div> 
+   </div>
+      <div class="chatContainer">
+          <div class="chatBtn">
+              <i class="iconfont icon-xiaoxi1"></i>
+          </div>
+          <div class="chatBox" ref="chatBox">
+              <div class="chatBox-head">
+                  <div class="chatBox-head-two">
+                      <div class="chat-people">
+                          <div class="ChatInfoHead">
+                              <img src="{$robotConfig['robotHead']}" alt="头像"/>
+                          </div>
+                          <div class="ChatInfoName">{$robotConfig['robotName']}：欢迎来到{$robotConfig['robotName']}聊天室</div>
+                      </div>
+                      <div class="chat-close">关闭</div>
+                  </div>
+              </div>
+              <div class="chatBox-info">
+                  <div class="chatBox-kuang" ref="chatBoxkuang">
+                      <div class="chatBox-content">
+                          <div class="chatBox-content-demo" id="chatBox-content-demo">
+
+                              <div class="clearfloat">
+                                  <div class="author-name">
+                                      <small class="chat-date"><?php echo date('Y-m-d H:i:s') ?></small>
+                                  </div>
+                                  <div class="robot-name" style="text-align: left;">
+                                      <h7 style="margin-left: 4px;color: #999">{$robotConfig['robotName']}</h7>
+                                  </div>
+                                  <div class="left">
+                                      <div class="chat-avatars"><img src="{$robotConfig['robotHead']}" alt="头像"/></div>
+                                      <div class="chat-message">
+                                          {$robotConfig['robotMessage']}
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="chatBox-send">
+                          <div class="div-textarea" contenteditable="true"></div>
+                          <div>
+                              <button id="chat-biaoqing" class="btn-default-styles">
+                                  <i class="iconfont icon-biaoqing"></i>
+                              </button>
+                              <label id="chat-tuxiang" title="发送图片" for="inputImage" class="btn-default-styles">
+                                  <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png"
+                                         name="file" id="inputImage" class="hidden">
+                                  <i class="iconfont icon-tuxiang"></i>
+                              </label>
+                              <button id="chat-fasong" class="btn-default-styles"><i class="iconfont icon-fasong"></i>
+                              </button>
+                          </div>
+                          <div class="biaoqing-photo">
+                              <ul>
+                                  <li><span class="emoji-picker-image" style="background-position: -9px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -40px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -71px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -102px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -133px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -164px -18px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -9px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -40px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -71px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -102px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -133px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -164px -52px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -9px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -40px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -71px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -102px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -133px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -164px -86px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -9px -120px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -40px -120px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -71px -120px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -102px -120px;"></span>
+                                  </li>
+                                  <li><span class="emoji-picker-image" style="background-position: -133px -120px;"></span>
+                                  </li>
+                                  <li><span class="emoji-picker-image" style="background-position: -164px -120px;"></span>
+                                  </li>
+                                  <li><span class="emoji-picker-image" style="background-position: -9px -154px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -40px -154px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -71px -154px;"></span></li>
+                                  <li><span class="emoji-picker-image" style="background-position: -102px -154px;"></span>
+                                  </li>
+                                  <li><span class="emoji-picker-image" style="background-position: -133px -154px;"></span>
+                                  </li>
+                                  <li><span class="emoji-picker-image" style="background-position: -164px -154px;"></span>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <script>
+
+          screenFuc();
+          function screenFuc() {
+              var topHeight = $(".chatBox-head").innerHeight();//聊天头部高度
+              //屏幕小于768px时候,布局change
+              var winWidth = $(window).innerWidth();
+              if (winWidth <= 768) {
+                  var totalHeight = $(window).height(); //页面整体高度
+                  $(".chatBox-info").css("height", totalHeight - topHeight);
+                  var infoHeight = $(".chatBox-info").innerHeight();//聊天头部以下高度
+                  //中间内容高度
+                  $(".chatBox-content").css("height", infoHeight - 46);
+                  $(".chatBox-content-demo").css("height", infoHeight - 46);
+
+                  $(".chatBox-list").css("height", totalHeight - topHeight);
+                  $(".chatBox-kuang").css("height", totalHeight - topHeight);
+                  $(".div-textarea").css("width", winWidth - 106);
+              } else {
+                  $(".chatBox-info").css("height", 495);
+                  $(".chatBox-content").css("height", 448);
+                  $(".chatBox-content-demo").css("height", 448);
+                  $(".chatBox-list").css("height", 495);
+                  $(".chatBox-kuang").css("height", 495);
+                  $(".div-textarea").css("width", 260);
+              }
+          }
+          (window.onresize = function () {
+              screenFuc();
+          })();
+          //未读信息数量为空时
+          var totalNum = $(".chat-message-num").html();
+          if (totalNum == "") {
+              $(".chat-message-num").css("padding", 0);
+          }
+          $(".message-num").each(function () {
+              var wdNum = $(this).html();
+              if (wdNum == "") {
+                  $(this).css("padding", 0);
+              }
+          });
+
+          $(".chatBox").toggle(30);
+          //打开/关闭聊天框
+          $(".chatBtn").click(function () {
+              $(".chatBox").toggle(30);
+
+              $(".chatBox-head-two").toggle(10);
+              $(".chatBox-kuang").toggle(10);
+
+              //聊天框默认最底部
+              $(document).ready(function () {
+                  $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+              });
+          })
+
+          $(".chat-close").click(function () {
+              $(".chatBox-head-two").toggle(10);
+              $(".chatBox-kuang").toggle(10);
+              $(".chatBox").toggle(30);
+          })
+
+          //      发送信息
+          $("#chat-fasong").click(function () {
+              var datas = getdate();
+              var textContent = $(".div-textarea").html().replace(/[\n\r]/g, '<br>')
+              if (textContent != "") {
+                  $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                      "<div class=\"author-name\"><small class=\"chat-date\">" + datas + "</small> </div> " +
+                      "<div class=\"robot-name\" style=\"text-align: right;\"><h7 style=\"margin-right: 4px;color: #999\">游客</h7></div>" +
+                      "<div class=\"right\"> <div class=\"chat-message\"> " + textContent + " </div> " +
+                      "<div class=\"chat-avatars\"><img src=\"static/img/project-2.jpg\" alt=\"头像\" /></div> </div> </div>");
+                  //发送后清空输入框
+                  $(".div-textarea").html("");
+                  //聊天框默认最底部
+                  $(document).ready(function () {
+                      $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                  });
+
+                  $.ajax({
+                      type: "POST",
+                      dataType: "JSON",
+                      url: "{:url('Robot/robotApi')}",
+                      data: {
+                          content:textContent,
+                      },
+                      success:function(data){
+                          if(data.code == 1){
+                              var datas = getdate();
+                              $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                                  "<div class=\"author-name\"><small class=\"chat-date\">" + datas + "</small> </div> " +
+                                  "<div class=\"robot-name\" style=\"text-align: left;\"><h7 style=\"margin-left: 4px;color: #999\">" + data.robot.robotName + "</h7></div>" +
+                                  "<div class=\"left\"><div class=\"chat-avatars\"><img src=" + data.robot.robotHead + " alt=\"头像\" /></div>" +
+                                  "<div class=\"chat-message\"> " + data.res.values.text + " </div> </div> </div>"
+                              );
+
+                              //聊天框默认最底部
+                              $(document).ready(function () {
+                                  $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                              });
+                          } else {
+                              var datas = getdate();
+                              $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                                  "<div class=\"author-name\"><small class=\"chat-date\">" + datas + "</small> </div> " +
+                                  "<div class=\"robot-name\" style=\"text-align: left;\"><h7 style=\"margin-left: 4px;color: #999\">" + data.robot.robotName + "</h7></div>" +
+                                  "<div class=\"left\"><div class=\"chat-avatars\"><img src=" + data.robot.robotHead + " alt=\"头像\" /></div>" +
+                                  "<div class=\"chat-message\"> " + data.robot.robotErrorMessage + " </div> </div> </div>"
+                              );
+
+                              //聊天框默认最底部
+                              $(document).ready(function () {
+                                  $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                              });
+                          }
+                      }
+                  })
+              } else {
+                  layer.msg('请输入内容哦');
+              }
+          });
+
+          //      发送表情
+          $("#chat-biaoqing").click(function () {
+              $(".biaoqing-photo").toggle();
+          });
+          $(document).click(function () {
+              $(".biaoqing-photo").css("display", "none");
+          });
+          $("#chat-biaoqing").click(function (event) {
+              event.stopPropagation();//阻止事件
+          });
+
+          $(".emoji-picker-image").each(function () {
+              $(this).click(function () {
+                  var datas = getdate();
+                  layer.msg('功能待开发，目前仅支持文字');
+                    return;
+                  var bq = $(this).parent().html();
+                  console.log(bq)
+                  $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                      "<div class=\"author-name\"><small class=\"chat-date\">" + datas + "</small> </div> " +
+                      "<div class=\"right\"> <div class=\"chat-message\"> " + bq + " </div> " +
+                      "<div class=\"chat-avatars\"><img src=\"img/icon01.png\" alt=\"头像\" /></div> </div> </div>");
+                  //发送后关闭表情框
+                  $(".biaoqing-photo").toggle();
+                  //聊天框默认最底部
+                  $(document).ready(function () {
+                      $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                  });
+              })
+          });
+
+          //      发送图片
+          function selectImg(pic) {
+              if (!pic.files || !pic.files[0]) {
+                  return;
+              }
+              var reader = new FileReader();
+              reader.onload = function (evt) {
+                  var datas = getdate();
+                  layer.msg('功能待开发，目前仅支持文字');
+                  return;
+                  var images = evt.target.result;
+                  $(".chatBox-content-demo").append("<div class=\"clearfloat\">" +
+                      "<div class=\"author-name\"><small class=\"chat-date\">" + datas + "</small> </div> " +
+                      "<div class=\"right\"> <div class=\"chat-message\"><img src=" + images + "></div> " +
+                      "<div class=\"chat-avatars\"><img src=\"img/icon01.png\" alt=\"头像\" /></div> </div> </div>");
+                  //聊天框默认最底部
+                  $(document).ready(function () {
+                      $("#chatBox-content-demo").scrollTop($("#chatBox-content-demo")[0].scrollHeight);
+                  });
+              };
+              reader.readAsDataURL(pic.files[0]);
+
+          }
+
+          function getdate() {
+              var date=new Date();
+
+              var yy=date.getFullYear();
+              var mm=date.getMonth()+1;
+              if (mm < 10) mm = '0'+mm;
+              var dd=date.getDate();
+              if (dd < 10) dd = '0'+dd;
+              var hh=date.getHours();
+              if (hh < 10) hh = '0'+hh;
+              var ii=date.getMinutes();
+              if (ii < 10) ii = '0'+ii;
+              var ss=date.getSeconds();
+              if (ss < 10) ss = '0'+ss;
+
+              return yy+'-'+mm+'-'+dd+' '+hh+':'+ii+':'+ss;
+          }
+      </script>
+  </footer> 
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(function(){
+          var scrollDiv = document.createElement('div');
+          $(scrollDiv).attr('id','toTop').html('<ul><li class="backBtn" title="返回顶部"><a href="javascript:;" class="icon_backTo"></a></li></ul>').appendTo('body');
+          $(window).scroll(function(){
+              if($(this).scrollTop() > 300){
+                  $('.backBtn').fadeIn();
+              }else{
+                  $('.backBtn').fadeOut();
+              }
+          });
+          $('.backBtn').click(function(){
+              $('body,html').animate({scrollTop:0},300);
+          })
+      })
+
+    });
+  </script>
+  <script>
+      $.ajax({
+          type:"GET",
+          url:"{:url('VisitorApi/recordApi')}"
+      })
+
+      $.ajax({
+          type:"GET",
+          url:"{:url('VisitorApi/recordShow')}",
+          success:function(data){
+              if(data.code==1){
+                  $("#census").html(data.res);
+              }else{
+              }
+          }
+      })
+  </script>
+ </body>
+</html>

@@ -1,0 +1,79 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">系统用户管理</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">权限管理</a></li>
+              <li class="breadcrumb-item active">系统用户管理</li>
+            </ul>
+          </div>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-close">
+                      <form class="form-inline" method="get">
+                        <div class="form-group">
+                          <input id="inlineFormInput" name="keyword" type="text" placeholder="账号" class="mr-3 form-control" value="{$Think.get.keyword}">
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary">搜索</button>
+                      </div>
+                      </form>
+                    </div>
+                    <div class="card-header d-flex align-items-center">
+                      <a href="addUser.html"><button type="submit" class="btn btn-danger">添加管理员</button></a>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <tr>
+                              <th>ID</th>
+                              <th>账号</th>
+                              <th>姓名</th>
+                              <th>手机号</th>
+                              <th>用户组</th>
+                              <th>最后登录时间</th>
+                              <th>操作</th>
+                            </tr>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {foreach name="userList" item="vo"}
+                            <tr>
+                              <td>{$vo.id}</td>
+                              <td>{$vo.username}</td>
+                              <td>{$vo.realname}</td>
+                              <td>{$vo.tel}</td>
+                              <td>{$vo.group_name}</td>
+                              <td>{gt name="vo.last_login_time" value="0"}{$vo.last_login_time|date="Y-m-d H:i:s",###}{/gt}</td>
+                              <td class="tdCenter">
+                                <a href="{:url('Authority/editUser', ['id' => $vo.id])}" class="active" ui-toggle-class=""><i class="fa fa-edit text-success text-active padding10"></i></a>
+                                <a href="{:url('Authority/delUser')}?id={$vo.id}" class="active" ui-toggle-class=""><i class="fa fa-times text-danger text padding10"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            {/foreach}
+                          </tbody>
+                        </table>
+                        {$res->render()}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </section>
+          <script>
+
+          </script>
+{/block}

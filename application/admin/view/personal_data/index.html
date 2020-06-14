@@ -1,0 +1,72 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner" style="padding-bottom: 59px;">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">博主详情</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item active">博主详情</li>
+            </ul>
+          </div>
+          <!-- Forms Section-->
+          <section class="forms"> 
+            <div class="container-fluid">
+              <div class="row">
+                <!-- Form Elements -->
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <form class="form-horizontal" method="post" action="save.html" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{$res.id}">
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">姓名：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" name="name" value="{$res.name}" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">是否显示：</label>
+                          <div class="col-sm-9">
+                            <input type="radio" name="sex" value="1" {if condition="$res.sex == 1"}checked{/if}><span style="margin-right: 3%;">男</span>
+                            <input type="radio" name="sex" value="0" {if condition="$res.sex == 0"}checked{/if}><span style="margin-right: 3%;">女</span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">生日：</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="time" name="birth" value='{if condition="!empty($res.birth)"}{$res.birth|date="Y-m-d",###}{/if}' required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">展示图</label>
+                            <div class="col-sm-9">
+                                {if condition="$res['image']"}
+                                <img src="{$res.image}" alt="" width="100px">
+                                {/if}
+                                <input type="file" name="file">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">介绍：</label>
+                            <div class="col-sm-9">
+                              <textarea id="content" name="descript" rows="10" required>{$res.descript}</textarea>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <input class="btn btn-primary" value="确认" type="submit">
+                          <button class="btn btn-default " type="button" onclick="history.go(-1)">退出</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+{/block}

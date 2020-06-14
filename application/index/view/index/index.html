@@ -1,0 +1,333 @@
+﻿{extend name="base" /}
+{block name="body"}
+<script type="text/javascript" src="__STATIC__/index/js/swiper.min_2.js"></script>	
+  <section class="container">
+    <div class="banner banner-navbar">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+        {foreach name="carousel" item="vo"}
+        <div class="swiper-slide"><img src="{$vo.content}" alt="个人博客"></div>
+        {/foreach}
+			</div>
+			<div class="swiper-pagination"></div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		</div>
+    </div>
+  <script>
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true,
+			spaceBetween: 30,
+			centeredSlides: true,
+			autoplay: 8000,
+			autoplayDisableOnInteraction: false,
+			loop: true
+		});
+  </script>
+  <!-- 左 -->
+  <div class="content-wrap">
+    <!-- 主要内容 -->
+    <div class="content">
+      <!-- 特别推荐 -->
+      <style>
+        p{};
+      </style>
+      <div class="sticky">
+        <h2 class="title" style="background:#F7F7F7;">特别推荐</h2>
+        <ul>
+          {foreach $recommend as $vo}
+          <li class="item">
+            <a href="{:url('index/Article/details',['id'=>$vo.id])}" target="_blank">
+              <img src="{$vo.images}" alt="{$vo.label}" />
+              <h3>{$vo.title}</h3>
+              <div class="muted" style='display:block;word-break: break-all;word-wrap: break-word;overflow: hidden;height: 70px;'>
+                {$vo.describe}
+              </div>
+            </a>
+          </li>
+          {/foreach}
+        </ul>
+      </div>
+      <!-- 特别推荐 -->
+      <!-- 最新发布 -->
+      <h2 class="title" style="background:#F7F7F7;margin-top: 12px;">最新发布</h2>
+      {foreach $newArticle as $vo}
+      <article class="excerpt">
+        <div class="focus">
+          <a href="{:url('index/Article/details',['id'=>$vo.id])}" class="thumbnail" target="_blank">
+            <img src="{$vo.images}" alt="{$vo.title}" title="{$vo.title}"/>
+          </a>
+        </div>
+        <header>
+          <h2>
+            <a href="{:url('index/Article/details',['id'=>$vo.id])}" title="{$vo.title}" target="_blank">{$vo.title}</a></h2>
+        </header>
+        <p class="note" style="height: 34px;">{$vo.describe}</p>
+        <p class="createtime">
+          <span class="muted">
+            <i class="ico icon-time icon12"></i>{$vo.create_time|date="Y-m-d",###}</span>
+          <span class="muted">
+            <i class="ico icon-eye-open icon12"></i>{$vo.browse_num}次浏览</span>
+          <span class="muted">个人博客：[<a href='#'>{$vo.atName}</a>]</span>
+        </p>
+      </article>
+      {/foreach}
+      <!-- 最新发布 -->
+    </div>
+    <!-- 主要内容 -->
+  </div>
+  <!-- 左 -->
+      <!-- </div> -->
+  <!-- 右 -->
+  <aside class="sidebar">
+    <!-- 热门标签 -->
+    <div class="widget">
+		  <h3 class="widget_tit">热门标签</h3>
+      <div class="tag_list">
+      <ul>
+        {foreach $hotTags as $k => $vo}
+        <li><a href='{if condition="!empty($vo)"}{:url("index/Article/index",["pid"=>$vo])}{else/}#{/if}' target="_blank">{$k}</a></li>
+        {/foreach}
+      </ul>
+      </div>
+    </div>
+    <!-- 热门标签 -->
+
+    <!-- 推荐文章 -->
+    <div class="widget d_postlist">
+      <h3 class="widget_tit">推荐文章</h3>
+      <ul>
+        {foreach $newArticle as $vo}
+        <li>
+            <a href="{:url('index/Article/details',['id'=>$vo.id])}">
+              <span class="thumbnail">
+                <img src="{$vo.images}" alt="{$vo.title}" title="{$vo.title}"/></span>
+              <span class="text">{$vo.title}</span>
+              <div>
+                <span class="muted">{$vo.create_time|date="Y-m-d",###}</span>
+                <span class="muted">
+                  <span class="ds-thread-count" data-replace="1">{$vo.browse_num}次阅读</span>
+                </span>
+              </div>
+            </a>
+        </li>
+        {/foreach}
+      </ul>
+    </div>
+    <!-- 推荐文章 -->
+
+    <!-- 每日一句 -->
+    <div class="widget d_textbanner" style="margin-top:10px;box-shadow: 0 1px 3px rgba(0, 0, 0, .1);">
+      <a class="style03" style="padding-bottom:0;" href="{:url('index/DaySentence/index')}">
+        <strong>每日一句</strong>
+      </a>
+      <div style="width:90%;margin-left:5%;margin-right:5%;padding-bottom:20px;padding-top:10px;text-indent:2em">
+        <p style="margin-block-start: 0em;"><span style="font-size: 13px;color: #888;">{$daySentence['content']}</span></p>
+        <p style="margin-block-start: 0em;margin-block-end: 0em;"><span style="font-size: 13px;color: #888;">{$daySentence['content_en']}</span></p>
+      </div>
+    </div>
+    <!-- 每日一句 -->
+
+    <!-- 统计 -->
+		<div class="widget d_textbanner" style="margin-top:10px;box-shadow: 0 1px 3px rgba(0, 0, 0, .1);">
+      <a class="style03" target="_blank" style="padding-bottom:0;">
+  			<strong>统计</strong>
+  		</a>
+  		<p class="run">
+        <span class="runs">本站运行：<strong style="color:#f00;">{$webRunDay}</strong> 天</span>
+        <span class="runs">本月更新：<strong style="color:#f00;">{$monthArticleNum}</strong> 篇</span>
+        <span class="runs">共有文章：<strong style="color:#f00;">{$allArticleNum}</strong> 篇</span>
+        <span class="runs" style="padding-bottom:20px;"></span></span></span></span>
+        <style>
+          .run{width:90%;margin-left:5%; margin-right:5%;}
+          .runs{width:60%; font-size:16px; line-height:30px;display:block; margin:auto;}
+        </style>
+  		</p>
+		</div>
+    <!-- 统计    -->
+
+    <!-- 日历 -->
+    <div class="widget d_textbanner" style="margin-top:10px;box-shadow: 0 1px 3px rgba(0, 0, 0, .1);background-image:url(__STATIC__/index/images/clock.jpg);">
+      <a class="style03" target="_blank" style="padding-bottom:0;">
+        <strong>当前时间</strong>
+      </a>
+      <div style="padding-bottom:10px;">
+          <div class="box" id="clock">
+            <!-- 原点 -->
+            <div class="origin"></div>
+            <!-- 时钟数 -->
+            <div class="dot_box">
+                <div class="dot">6</div>
+                <div class="dot">5</div>
+                <div class="dot">4</div>
+                <div class="dot">3</div>
+                <div class="dot">2</div>
+                <div class="dot">1</div>
+                <div class="dot">12</div>
+                <div class="dot">11</div>
+                <div class="dot">10</div>
+                <div class="dot">9</div>
+                <div class="dot">8</div>
+                <div class="dot">7</div>
+            </div>
+            <!-- 时、分、秒针 -->
+            <div class="clock_line hour_line" id="hour_line"></div>
+            <div class="clock_line minute_line" id="minute_line"></div>
+            <div class="clock_line second_line" id="second_line"></div>
+            <!-- 日期 -->
+            <div class="date_info" id="date_info"></div>
+            <!-- 时间 -->
+            <div class="time_info" >
+                <div class="time" id="hour_time"></div>
+                <div class="time" id="minute_time"></div>
+                <div class="time" id="second_time"></div>
+            </div>
+          </div>
+          <script>
+            $(function(){
+                var clock = document.getElementById("clock");
+                function initNumXY(){
+                    // 1、12个数字的位置设置
+                    var radius = 80;//大圆半价
+                    var dot_num = 360/$(".dot").length;//每个div对应的弧度数
+                    //每一个dot对应的弧度;
+                    var ahd = dot_num*Math.PI/180;
+                    $(".dot").each(function(index, el) {
+                        $(this).css({
+                            "left":90+Math.sin((ahd*index))*radius,
+                            "top":90+Math.cos((ahd*index))*radius
+                        });
+                    });
+                    // 2、刻钟设置
+                    for(var i = 0; i < 60; i++) {
+                        clock.innerHTML += "<div class='clock-scale'> " + 
+                               "<div class='scale-hidden'></div>" + 
+                               "<div class='scale-show'></div>" + 
+                              "</div>";
+                    }
+                    var scale = document.getElementsByClassName("clock-scale");
+                        for(var i = 0; i < scale.length; i++) {
+                            scale[i].style.transform="rotate(" + (i * 6 - 90) + "deg)";
+                    }
+                }
+                initNumXY();//调用上面的函数
+                //获取时钟id
+                var hour_line = document.getElementById("hour_line"),
+                    minute_line = document.getElementById("minute_line"),
+                    second_line = document.getElementById("second_line"),
+                    date_info = document.getElementById("date_info"),//获取date_info
+                    hour_time = document.getElementById("hour_time"),// 获去时间id
+                    minute_time = document.getElementById("minute_time"),
+                    second_time = document.getElementById("second_time");
+                //3、设置动态时间
+                function setTime(){
+                    var nowdate = new Date();
+                    //获取年月日时分秒
+                    var year = nowdate.getFullYear(),
+                        month = nowdate.getMonth()+1,
+                        day = nowdate.getDay(),
+                        hours = nowdate.getHours(),
+                        minutes = nowdate.getMinutes(),
+                        seconds = nowdate.getSeconds(),
+                        date = nowdate.getDate();
+                    var weekday =["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+                    // 获取日期id
+                    date_info.innerHTML=year+"年"+month+"月"+day+"日   "+weekday[day];
+                    hour_time.innerHTML = hours >=10 ? hours : "0"+hours;
+                    minute_time.innerHTML = minutes >=10 ? minutes : "0"+minutes;
+                    second_time.innerHTML = seconds >=10 ? seconds : "0"+seconds;
+                    // console.log(year+"年"+month+"月"+day+"日   "+weekday[day]);
+                    //时分秒针设置
+                    var hour_rotate = (hours*30-90) + (Math.floor(minutes / 12) * 6);
+                    hour_line.style.transform = 'rotate(' + hour_rotate + 'deg)';
+                    minute_line.style.transform = 'rotate(' + (minutes*6 - 90) + 'deg)';
+                    second_line.style.transform = 'rotate(' + (seconds*6 - 90)+'deg)';
+                }
+                setInterval(setTime, 1000);
+            });
+          </script>
+          <style>
+            .box{ width: 200px; height: 200px; border:10px solid #DEE3E7;margin:15px auto; border-radius: 50%;
+                box-shadow: 0px 0px 20px 3px #444 inset; position: relative;}
+            /*原点*/
+            .origin{ width: 10px; height: 10px; border-radius: 50%; background: #ff0000; top:95px; left: 95px; position: absolute;}
+            /* 指针 */
+            .clock_line{ position: absolute;position:absolute;z-index:20;}
+            .hour_line{width:50px;height:2px;top:99px;left:100px;background-color:#000;border-radius:1px;
+                transform-origin:0 50%;box-shadow:1px -3px 8px 3px #aaa;}
+            .minute_line{width:65px;height:1px;top:99.5px;left:95px;background-color:#000;
+                transform-origin:7.692% 50%;box-shadow:1px -3px 8px 1px #aaa;}
+            .second_line{width:85px;height:1px;top:100px;left:90px;background-color:#f60;
+                transform-origin:11.765% 50%;box-shadow:1px -3px 7px 1px #bbb;}
+
+            .dot_box{width: inherit; height: inherit;}
+            /*时钟数*/
+            .dot{ width: 20px; height: 20px; line-height: 20px; text-align: center; font-size: 11px; position: absolute;}
+            .clock-scale{width:195px;height:2px;transform-origin:0% 50%;z-index:7;
+              position:absolute;top:99.5px;left:100px;}
+            .scale-show{ width:6px;height:1px;background-color:#555;float:left;}
+            .scale-hidden{width:91.5px;height:1px;float:left;}
+            /*日期*/
+            .date_info{width:140px;height:14px; 
+                line-height:14px;text-align:center;position:absolute;top:115px;left:30px;z-index:11;color:#555;font-weight:bold;font-size: 2px;}
+            .time_info{ width: 55px; height: 17.5px; line-height: 17.5px;text-align:center;position:absolute;top:135px;left:75px;z-index:11;color:#555; background: #253e3e; }
+            .time{ width: 17.5px ;height:17.5px; float: left; color: #fff; font-size: 11px;}
+             #minute_time{border-left:1px solid #fff;border-right:1px solid #fff;}
+          </style>
+      </div>
+    </div>
+    <!-- 日历 -->
+
+    <!-- 友情链接	 -->
+		<div class="widget d_textbanner" style="float: left; width:290px; min-height: 110px;box-shadow: 0 1px 3px rgba(0, 0, 0, .1);">
+			<a class="style03" href="{:url('index/Link/index')}"><strong>友情链接</strong></a>
+			<ul class="friendlyLink">
+        {foreach name="link" item="vo"}
+				<li><a href='{$vo.url}' target='_blank'>{$vo.name}</a></li>
+        {/foreach}
+			</ul>
+		</div>
+    <!-- 友情链接  -->
+
+    <!-- 广告位 -->
+    <div class="widget d_textbanner" style="float:left;">
+			<a class="style03" target="_blank" rel="nofollow" href="https://www.aliyun.com/acts/member-2019/index?userCode=g1jkzcr4">
+			<strong>广告位</strong>
+			<img class="gg" src="__STATIC__/index/picture/250-250_2.jpg" style="margin-top: 5px">
+			</a>
+		</div>
+    <style>
+          .bdsharebuttonbox {
+					  margin-left: 10px;
+				  }
+          .friendlyLink{
+            float: left; width:290px; min-height: 110px;
+          }
+          .friendlyLink a{
+						display: block;
+						width: 118px;
+						height: 35px;
+						float: left;
+						border: 1px #5CB85C solid;
+						padding: 0px !important;
+						line-height: 35px;
+						text-align: center;
+						color: #5CB85C;
+						transition: all 0.5s;
+						margin: 0px 12.5px 10px 12.5px;
+				  }
+				
+					.friendlyLink li a:hover {
+						color: #fff;
+						border-radius: 40px 0px;
+						background: #5CB85C;
+						color: #fff!important;
+					}
+		</style>
+    <!-- 广告位 -->
+  </aside>
+</section>
+{/block}

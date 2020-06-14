@@ -1,0 +1,64 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">权限组管理</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">权限管理</a></li>
+              <li class="breadcrumb-item active">系统日志查看</li>
+            </ul>
+          </div>
+          <section class="tables">   
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                      <form class="form-inline" method="get">
+                        <div class="form-group">
+                          <input id="inlineFormInput" name="keyword" type="text" placeholder="操作人/操作内容" class="mr-3 form-control" value="{$Think.get.keyword}">
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary">搜索</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>操作人</th>
+                              <th>操作</th>
+                              <th>操作时间</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {foreach name="list" item="vo"}
+                            <tr>
+                              <th scope="row">{$vo.id}</th>
+                              <td>{$vo.username}</td>
+                              <td>{$vo.action_name}</td>
+                              <td>{$vo.createtime|date="Y-m-d H:i:s",###}</td>
+                            </tr>
+                            {/foreach}
+                          </tbody>
+                        </table>
+                        {$list->render()}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </section>
+          <script>
+
+          </script>
+{/block}

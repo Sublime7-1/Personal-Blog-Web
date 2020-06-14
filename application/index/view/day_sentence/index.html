@@ -1,0 +1,60 @@
+﻿{extend name="base" /}
+{block name="body"}
+<section class="container"> 
+   <div class="page_left"> 
+    <ul> 
+      <li><a href="{:url('index/PersonalData/index')}">关于博主</a></li>
+      <li><a href="{:url('index/Link/index')}">友链申请</a></li>
+      <li><a href="{:url('index/DaySentence/index')}">精句提交</a></li>
+    </ul>
+   </div> 
+   <div class="page_right"> 
+    <h1 class="page_title"><a href="{:url('index/Index/index')}">主页</a> &gt; <a href="#">关于</a> &gt; <a href="#">精句提交</a> &gt; </h1> 
+    <div class="page_content"> 
+     <form action="{:url('index/DaySentence/save')}" enctype="multipart/form-data" method="post"> 
+      <table class="message_table"> 
+       <tbody> 
+        <tr> 
+             <td>精句（Chiness Version）</td>
+             <td><textarea name="content" cols="100" rows="4" id="content form-control" class="textarea_text"></textarea><span class="xing">*</span></td>
+        </tr>
+        <tr>
+            <td>精句（English Version）</td>
+            <td><textarea name="content_en" cols="100" rows="4" id="content form-control" class="textarea_text"></textarea><span class="xing">*</span></td>
+        </tr>
+        <tr>
+         <td></td> 
+         <td><input type="submit" name="submit" value="提交审核" class="dosubmit" style="width:100%;max-width:320px" /></td> 
+        </tr>
+       </tbody>
+      </table> 
+     </form> 
+    </div> 
+    <!--    注意事项--> 
+    <div class="zhuyi" style="width:69%; height:250px; margin:auto;"> 
+     <!-- <h3>注意：表单提交已关闭，如需交换友链，请联系QQ517999587！</h3>  -->
+     <!-- <ul class="zhuyixuanxiang"> 
+      <li><span>A.</span><a>在您申请本站友情链接之前请先做好本站链接，谢谢！；</a></li> 
+      <li><span>B.</span><a>本站对PR、权重无要求，但建站小于一个月，谷歌、百度收录小于50页，暂不交换；</a></li> 
+      <li><span>C.</span><a>淘宝、色情、反动、病毒、擦边球、纯商业、违法中华人民共和国法律的网站暂不交换；</a></li> 
+      <li><span>D.</span><a>内容为原创的个人博客、微博、日记、科技、IT、生活类网站会优先考虑收录；</a></li> 
+      <li><span>E.</span><a>申请成功后请勿随意撤下链接，否则本站也会删除对应链接并加入黑名单；</a></li> 
+     </ul>  -->
+    <style>
+        .zhuyixuanxiang li a{
+          line-height:40px;
+          padding-left:20px;
+          font-size:15px;
+          color:#555;
+        }
+        .zhuyixuanxiang li a:hover{color:#357EBD;}
+        .zhuyixuanxiang span{
+          font-size:15px;
+          color:#F78585;
+        }
+    </style> 
+    </div> 
+    <p style="margin:auto;width:80%; padding-bottom:30px;"><span style="color:#F00;font-size:16px;">说明：</span><a style="color:#F00;font-size:16px;padding-left:0px;">网站测试中，请勿提交！</a></p> 
+   </div> 
+  </section>
+{/block}

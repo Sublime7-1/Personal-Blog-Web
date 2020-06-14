@@ -1,0 +1,49 @@
+﻿{extend name="base" /}
+{block name="body"}
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <header class="archive-header">
+                <h1>搜索&nbsp;"{$Think.get.keyword}"&nbsp;的结果.</h1>
+            </header>
+            {foreach $res as $vo}
+            <article class="excerpt">
+                <div class="focus">
+                    <a href="{:url('index/Article/details',['id'=>$vo.id])}" class="thumbnail" target="_blank"> <img src="{$vo['images']}" alt="{$vo['title']}" title="{$vo['title']}" /></a>
+                </div>
+                <header>
+                    <h2> <a href="{:url('index/Article/details',['id'=>$vo.id])}" target="_blank">{$vo['title']}</a></h2>
+                </header>
+                <p class="note">{$vo['describe']}</p>
+                <p class="createtime"><span class="muted"> <i class="ico icon-time icon12"></i>&nbsp;创建时间：{$vo['create_time']|date="Y-m-d",###}</span> <span class="muted"> <i class="ico icon-eye-open icon12"></i>&nbsp;浏览次数：{$vo['browse_num']}</span> </p>
+            </article>
+            {/foreach}
+            <div class="pagenavi clearfix">
+                <div class="pages">
+                    {$res->render()}
+                </div>
+            </div>
+            <style>
+            </style>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="widget d_postlist">
+            <h3 class="widget_tit">热门推荐</h3>
+            <ul>
+                {foreach $recommend as $vo}
+                <li><a href="{:url('index/Article/details',['id'=>$vo.id])}">
+                    <span class="thumbnail">
+                      <img src="{$vo['images']}" alt="&lt;strong&gt;{$vo['title']}&lt;/strong&gt;" title="&lt;strong&gt;{$vo['title']}&lt;/strong&gt;" />
+                    </span>
+                    <span class="text"><strong>{$vo['title']}</strong></span>
+                    <span class="muted">{$vo['create_time']|date="Y-m-d",###}</span>
+                    <span class="muted"><span class="ds-thread-count" data-replace="1">{$vo['browse_num']}次阅读</span></span></a>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </aside>
+</section>
+{/block}

@@ -1,0 +1,99 @@
+{extend name="base" /}
+{block name="body"}
+<div class="content-inner" style="padding-bottom: 59px;">
+          <!-- Page Header-->
+          <header class="page-header">
+            <div class="container-fluid">
+              <h2 class="no-margin-bottom">添加权限组</h2>
+            </div>
+          </header>
+          <!-- Breadcrumb-->
+          <div class="breadcrumb-holder container-fluid">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="authGroup.html">权限组管理</a></li>
+              <li class="breadcrumb-item active">添加权限组</li>
+            </ul>
+          </div>
+          <!-- Forms Section-->
+          <section class="forms"> 
+            <div class="container-fluid">
+              <div class="row">
+                <!-- Form Elements -->
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <form class="form-horizontal" method="post" action="saveGroup.html">
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">权限组名称：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="group_name" name="group_name" value="" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">权限组描述：</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="desc" name="desc" value="">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">职位：</label>
+                          <div class="col-sm-9">
+                            {volist name="staffPost" id="vo" key="k"}
+                            <input type="radio" name="staff"  value="{$k}" required><span style="margin-right: 3%;">{$vo}</span>
+                            {/volist}
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">权限：</label>
+                          <input type="checkbox" name="isall" class="isall">是否全选<br/><br/>
+                          {volist name="auths" id="vo"}
+                          <div class="list-div">
+                            <input type="checkbox" name="access[]" class="checkall check-one" value="{$vo.id}" data="{$vo.id}">{$vo.name}
+                            {notempty name="vo['sub']"}
+                              <br/>
+                                  <br/>
+                              <font id="son{$vo['id']}">
+                              {volist name="vo['sub']" id="sub"}
+                              <div class="item-div">
+                                <span style="width: 75px;height: 16px;margin-left: 6px;display: inline-block;color: #999;border-left: solid 1px #999;">---------------</span><input type="checkbox" class="checkall check-two" name="access[]" data="{$sub.id}" value="{$sub.id}"><span style="margin-right: 4%;">{$sub.name}</span>
+                                {notempty name="sub['sub']"}
+                                <br/>
+                              
+                                <font id="son{$sub['id']}">
+                                {volist name="sub['sub']" id="sub1"}
+                                  <span style="width: 75px;height: 16px;margin-left: 36px;display: inline-block;color: #999;border-left: solid 1px #999;">---------------</span>
+                                  <input type="checkbox" name="access[]"  value="{$sub1.id}"><span style="margin-right: 3%;">{$sub1.name}</span>
+                                  {notempty name="sub1['sub']"}
+                                    {volist name="sub1['sub']" id="sub2"}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="{$sub2['id']}"><span style="margin-right: 1%;">{$sub2.name}</span>
+                                    {/volist}
+                                  {/notempty}
+                                  <br/>
+                                  
+                                {/volist}
+                                </font>
+                              {/notempty}
+                              <br/>
+                                
+                            </div>
+                            {/volist}
+                              </font>
+                            {/notempty}
+                            <br/>
+                              <br/>
+                          </div>
+                          {/volist}
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <input class="btn btn-primary" value="确认" type="submit">
+                          <button class="btn btn-default " type="button" onclick="history.go(-1)">退出</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+{/block}
